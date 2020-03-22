@@ -1,16 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import {ItemsComponent} from './items/items.component';
+import { CartComponent } from './cart/cart.component';
+import {FormsModule} from '@angular/forms';
+import { DetailsComponent } from './details/details.component';
+import {MyserviceService} from './myservice.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ItemsComponent,
+    CartComponent,
+    DetailsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    NgbModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [NgbActiveModal],
+  bootstrap: [AppComponent],
+  entryComponents: [DetailsComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

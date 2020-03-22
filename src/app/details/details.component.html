@@ -1,0 +1,31 @@
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Product Detail</h4>
+        <button type="button" class="close" (click)="activeModal.close('Cross Click')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Specs</th>
+            <th>Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{itemDetails.name}}</td>
+            <td><img src="{{itemDetails.imgPath}}" alt="image" width="200" height="200"></td>
+            <td>{{itemDetails.details}}</td>
+            <td>{{itemDetails.price}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" (click)="activeModal.close('Close Click')">Close</button>
+      </div>
+    </div>
