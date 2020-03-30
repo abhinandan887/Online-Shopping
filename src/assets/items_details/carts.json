@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Google Pixel",
+    "price": 83000,
+    "qty": 5,
+    "details": "6 GB Ram + 128 GB ROM + Stock Android",
+    "imgPath": "assets/product_img/Pixel3.jpg"
+  }
+]

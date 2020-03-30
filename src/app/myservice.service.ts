@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export interface Item {
+  id: number;
+  itemId: number;
   name: string;
   price: number;
   qty: number;
@@ -12,69 +16,71 @@ export interface Item {
   providedIn: 'root'
 })
 export class MyserviceService {
-  static ITEMS: Item[] = [
-    {
-      name: 'Samsung Galaxy S10',
-      price: 67000,
-      qty: 0,
-      details: '6 GB Ram + 128 GB ROM + Triple Camera at rear',
-      imgPath: 'assets/product_img/galaxy-s10.jpg'
-    },
-    {
-      name: 'Iphone XI',
-      price: 99999,
-      qty: 0,
-      details: '6 GB Ram + 512 GB ROM + Best Camera in smartphone',
-      imgPath: 'assets/product_img/Apple iPhone 11 Pro.jpg'
-    },
-    {
-      name: 'Google Pixel',
-      price: 83000,
-      qty: 0,
-      details: '6 GB Ram + 128 GB ROM + Stock Android',
-      imgPath: 'assets/product_img/Pixel3.jpg'
-    },
-    {
-      name: 'One Plus 7 Pro',
-      price: 57000,
-      qty: 0,
-      details: '8 GB Ram + 128 GB ROM + Cheapest Flagship',
-      imgPath: 'assets/product_img/OnePlus7Pro.jpg'
-    }
-  ];
-  public static cartItems: {name: string, price: number, qty: number, details: string} [] = [];
-  public items = MyserviceService.ITEMS;
   public static currentItem: Item;
-  constructor() {
+  itemURL = 'http://localhost:3000/items';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+  constructor(private http: HttpClient) {
+  }
+  /*private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.error('Client Side Error: ', errorResponse.error.message);
+    } else {
+      console.error('Server Side Error: ', errorResponse);
+    }
+    return new ErrorCode('There is problem with service. Please try again later');
+  }*/
+
+  getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.itemURL);
   }
 
-  OnAddInCart(item: Item) {
-    if (MyserviceService.cartItems.indexOf(item) === -1) {
-        item.qty = 1;
-        MyserviceService.cartItems.push(item);
+  getCartItem(item: Item): Observable<Item> {
+    const id = item.id;
+    const url = `${this.itemURL}/${id}`;
+    return this.http.get<Item>(url);
+  }
+
+  getUpdatedCart(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.itemURL + '?qty_ne=0');
+  }
+
+  addOrUpdateCart(item: Item): Observable<Item> {
+    /*
+    * In Both cases we are sending Patch request
+    * Reason for that we are using same Table for both Item and cart
+    * If Item gets added in cart then we update the qty and the cartId for cart
+    * Through this we distinguish whether this data is present or not in cart.
+    */
+    const id = item.id;
+    const url = `${this.itemURL}/${id}`;
+    if (item.qty > 0) {
+      // Inside PUT Operation
+      item.qty = item.qty + 1;
+      return this.http.patch<Item>(url, {qty: item.qty}, this.httpOptions);
     } else {
-      const index = MyserviceService.cartItems.indexOf(item);
-      const curQty: number = MyserviceService.cartItems[index].qty.valueOf();
-      MyserviceService.cartItems[index].qty = curQty + 1;
+      // Inside Post Operation
+      item.qty = 1;
+      // item.cartId = item.itemId;
+      return this.http.patch<Item>(url, {qty: item.qty}, this.httpOptions);
     }
   }
-
 
   setQty(item: Item) {
-    const index: number = MyserviceService.cartItems.indexOf(item);
-    if (item.qty <= 0) {
-      alert('Value can not be null or zero ');
-      item.qty =  MyserviceService.cartItems[index].qty;
-      return;
-    }
-    MyserviceService.cartItems[index].qty = MyserviceService.cartItems[index].qty;
+    const id = item.id;
+    const url = `${this.itemURL}/${id}`;
+    return this.http.patch<Item>(url, {qty: item.qty}, this.httpOptions);
   }
 
-  deleteFromCart(item: Item) {
-    const index: number = MyserviceService.cartItems.indexOf(item);
-    if (index !== -1) {
-      MyserviceService.cartItems.splice(index, 1);
-    }
+  deleteFromCart(item: Item): Observable<Item> {
+    const id = item.id;
+    const url = `${this.itemURL}/${id}`;
+    return this.http.patch<Item>(url, {qty: 0, cartId: null}, this.httpOptions);
+    // Below is actual Delete request. Here we are just setting qty as 0.
+    // return this.http.delete<Item>(url);
   }
 
   showDetails( item: Item) {

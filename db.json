@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "itemId": 1,
+      "name": "Samsung Galaxy S10",
+      "price": 67000,
+      "qty": 1,
+      "details": "6 GB Ram + 128 GB ROM + Triple Camera at rear",
+      "imgPath": "assets/product_img/galaxy-s10.jpg",
+      "cartId": null
+    },
+    {
+      "id": 2,
+      "itemId": 2,
+      "name": "Iphone XI",
+      "price": 99999,
+      "qty": 14,
+      "details": "6 GB Ram + 512 GB ROM + Best Camera in smartphone",
+      "imgPath": "assets/product_img/Apple iPhone 11 Pro.jpg",
+      "cartId": null
+    },
+    {
+      "id": 3,
+      "itemId": 3,
+      "name": "Google Pixel",
+      "price": 83000,
+      "qty": 0,
+      "details": "6 GB Ram + 128 GB ROM + Stock Android",
+      "imgPath": "assets/product_img/Pixel3.jpg",
+      "cartId": null
+    },
+    {
+      "id": 4,
+      "itemId": 4,
+      "name": "One Plus 7 Pro",
+      "price": 59000,
+      "qty": 0,
+      "details": "8 GB Ram + 128 GB ROM + Cheapest Flagship",
+      "imgPath": "assets/product_img/OnePlus7Pro.jpg",
+      "cartId": null
+    }
+  ]
+}

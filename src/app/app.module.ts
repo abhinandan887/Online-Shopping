@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AppRoutingModule} from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import {ItemsComponent} from './items/items.component';
 import { CartComponent } from './cart/cart.component';
 import {FormsModule} from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
-import {MyserviceService} from './myservice.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,10 @@ import {MyserviceService} from './myservice.service';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],

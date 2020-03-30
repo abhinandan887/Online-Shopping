@@ -9,20 +9,48 @@ import {Item, MyserviceService} from '../myservice.service';
 })
 export class CartComponent implements OnInit {
   totalAmount = 0;
-  cartItems: {name: string, price: number, qty: number, details: string} [] = [];
+  cartItems: Item [] = [];
   public constructor(private myService: MyserviceService) {
   }
 
   ngOnInit() {
-    this.cartItems = MyserviceService.cartItems;
+    this.refreshView();
+  }
+  refreshView() {
+    this.getCart();
+  }
+  getCart() {
+    this.myService.getUpdatedCart().subscribe(
+      (data: Item[]) => {
+        console.log('Inside getCart():' + data[0].name, data[0].qty);
+        this.cartItems = data;
+      }, ( error: Response) => {
+        alert('An Unexpected error occurred.');
+        console.error(error);
+      });
   }
 
   removeFromCart(item: Item) {
-    this.myService.deleteFromCart(item);
+    this.myService.deleteFromCart(item).subscribe(
+      (data: Item) => {
+      }, ( error: Response) => {
+        alert('An Unexpected error occurred.');
+        console.error(error);
+      }, () => {
+        this.refreshView();
+      });
   }
 
   setQty(item) {
-    this.myService.setQty(item);
+    this.myService.setQty(item).subscribe(
+      (data: Item) => {
+        console.log('Inside setQty():' + data[0].name, data[0].qty);
+      }, ( error: Response) => {
+        alert('An Unexpected error occurred.');
+        console.error(error);
+      }, () => {
+        this.refreshView();
+      });
   }
 
   numberOnly(event): boolean {

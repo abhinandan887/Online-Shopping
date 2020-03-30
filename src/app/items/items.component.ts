@@ -14,11 +14,18 @@ export class ItemsComponent implements OnInit {
   public constructor(private myService: MyserviceService, private modalService: NgbModal) {
   }
   ngOnInit() {
-    this.allItems = this.myService.items;
+    this.myService.getItems().subscribe(data => this.allItems = data);
   }
 
   onCreateOrUpdate(item: Item) {
-    this.myService.OnAddInCart(item);
+    this.myService.addOrUpdateCart(item).subscribe(
+        (data: Item) => {
+          console.log('onCreateOrUpdate:' + data);
+        }, ( error: Response) => {
+          alert('An Unexpected error occurred.');
+          console.error(error);
+      }
+    );
   }
 
   onShowDetails(item: Item) {
