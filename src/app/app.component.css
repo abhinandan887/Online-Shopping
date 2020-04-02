@@ -1,0 +1,44 @@
+.navbar {
+  background-color: teal;
+  background-image: none;
+}
+#title{
+  color: #dce775;
+  font-weight: bolder;
+  font-family: "Arial Rounded MT Bold";
+  font-size: 30px;
+}
+.nav_button{
+  color: #b2ff59;
+  font-size: 24px;
+  font-family: Consolas;
+}
+
+.expand-footer{
+
+}
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: teal;
+  color: white;
+  text-align: center;
+}
+
+.nav-links {
+  padding-left: 10px;
+  border-left: 3px solid white;
+  padding-bottom: 6px;
+}
+a{
+  color: white;
+}
+#social-link-1, #social-link-2, #social-link-3, #social-link-4, #social-link-5{
+  margin-right: 35px;
+  font-size:35px;
+  color: white;
+}

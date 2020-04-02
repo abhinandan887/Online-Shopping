@@ -1,2 +1,83 @@
-<h1 class="card-header">Online Shopping</h1>
+  <nav class="mb-10 navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand" href="#" id="title"><strong>{{title}}</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link nav_button" href="#">
+            <i class="fa fa-home nav-links"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav_button" href="/cart">
+            <i class="fa fa-fw fa-shopping-cart nav-links"></i> Cart
+          </a>
+        </li>
+      </ul>
+      <div class="input-group-text" style="width: 40%">
+        <input type="text" title="Search for Items" placeholder="Search For items" class="form-control input-group-append">
+        <i class="fa fa-fw fa-search "></i>
+      </div>
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item">
+          <a class="nav-link nav_button" href="/login">
+            <i class="fa fw fa-sign-in nav-links"></i>Login/SignUp
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav_button" href="/logout">
+            <i class="fa fw fa-sign-out nav-links"></i>Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
 <router-outlet></router-outlet>
+<footer class="footer" >
+  <div class="container" id="collapseExample" [ngbCollapse]="isCollapsed">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5 text-white">
+      <ul class="list-unstyled list-inline text-center">
+        <li id="social-link-1" class="list-inline-item">
+          <a href="https://www.linkedin.com/in/abhinandanprasad/">
+          <i class="fa fa-linkedin-square"></i>
+          </a></li>
+        <li id="social-link-2" class="list-inline-item">
+          <a href="https://github.com/abhinandan887">
+            <i class="fa fa-github-square">
+            </i>
+          </a>
+        </li>
+        <li id="social-link-3" class="list-inline-item">
+          <a href="https://www.instagram.com/abhinandanprasad/">
+          <i class="fa fa-instagram"></i>
+        </a>
+        </li>
+        <li id="social-link-4" class="list-inline-item">
+          <a href="https://www.youtube.com/channel/UCPslvunV9fP_Ahk_p7cxnxA?view_as=subscriber">
+          <i class="fa fa-youtube-play"></i></a></li>
+        <li id="social-link-5" class="list-inline-item">
+          <a (click)="sendMail()" target="_blank">
+          <i class="fa fa-envelope"></i></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+
+  </div>
+  </div>
+  <div >
+    <i class="fa " style="font-size:48px;color:white"
+       [ngClass]="{
+          'fa-angle-up': isCollapsed,
+          'fa-angle-down': !isCollapsed
+       }"
+       (click)="isCollapsed = !isCollapsed"
+       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"></i>
+  </div>
+</footer>
+
